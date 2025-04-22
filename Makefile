@@ -1,3 +1,5 @@
+postgres:
+	docker run --name postgres -p 5432:5432 -e POSTGRES_USER=sodiq -e POSTGRES_PASSWORD=password -d postgres
 migrate_up:
 	migrate -path db/migration/ -database "postgresql://sodiq:password@localhost:5432/simple_bank?sslmode=disable" -verbose up
 migrate_up1:
@@ -14,4 +16,4 @@ mock:
 	mockgen -package mockdb -destination db/mock/store.go github.com/olaniyi38/BE/db/sqlc Store
 test:
 	go test -v -cover ./...
-.PHONY: migrate_up migrate_down sqlc server migrate_down1 migrate_up1 test
+.PHONY: postgres migrate_up migrate_down sqlc server migrate_down1 migrate_up1 test
